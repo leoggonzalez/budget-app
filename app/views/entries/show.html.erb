@@ -1,0 +1,39 @@
+<h1>Entry #<%= @entry.id %></h1>
+<div class="card">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Ammount</th>
+        <td><%= @entry.ammount %></td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td><%= @entry.description %></td>
+      </tr>
+      <tr>
+        <th scope="row">Account</th>
+        <td><%= @account.name %></td>
+      </tr>
+      <tr>
+        <th scope="row">Active On</th>
+        <td><%= @entry.active_on.strftime("%d/%m/%Y") %></td>
+      </tr>
+      <tr>
+        <th scope="row">Recurrent</th>
+        <td><%= @entry.recurrent %></td>
+      </tr>
+      <tr>
+        <th scope="row">Inactive On</th>
+        <td><%= @entry.inactive_on && @entry.inactive_on.strftime("%d/%m/%Y") %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="mt-3">
+  <%= link_to "Back to Entries", entries_path, class: "btn btn-primary" %>
+  <%= link_to  "Edit", edit_entry_path(@entry), class: "btn btn-warning" %>
+  <%= link_to 'Destroy', entry_path(@entry), method: :delete, data: {
+          confirm: "Are you sure you wan't to delete this article?"
+        }, class: "btn btn-danger" %>
+
+</div>

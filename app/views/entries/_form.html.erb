@@ -1,0 +1,47 @@
+<%= render 'shared/errors' %>
+
+<div class="card p-3 shadow">
+  <%= form_with(model: @entry, local: true) do |f| %>
+  <div class="form-group">
+    <div class="form-inline">
+      <div class="form-check mr-3">
+        <%= f.radio_button :type, "expense", checked: true, class: "form-check-input" %>
+        <%= label_tag(:entry_type_expense, "Expense", class: "form-check-label") %>
+      </div>
+      <div class="form-check mr-3">
+        <%= f.radio_button :type, "Income", class: "form-check-input" %>
+        <%= label_tag(:entry_type_income, "Income", class: "form-check-label") %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :ammount %>
+    <%= f.number_field :ammount, class: "form-control", step: "any", required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :account_id %>
+    <%= f.select :account_id, options_from_collection_for_select(@accounts, "id", "name", "2"), {}, class: "form-control" %>
+  </div>
+  <div class="form-inline mb-3">
+    <div class="form-group mr-3">
+      <%= f.label :active_on, class: "mr-2" %>
+      <%= f.date_field :active_on, class: "form-control", :value => @entry.active_on ? @entry.active_on.strftime('%Y-%m-%d') : Time.now.strftime('%Y-%m-%d') %>
+    </div>
+    <div class="form-group mr-3">
+      <%= f.label :recurrent, class: "mr-2" %>
+      <%= f.select :recurrent, options_for_select(["Daily", "Monthly", "Yearly"]), {:include_blank => "No"}, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :inactive_on, class: "mr-2" %>
+      <%= f.date_field :inactive_on, class: "form-control" %>
+    </div>
+  </div>
+
+  <%= f.submit class: "btn btn-primary" %>
+  <%= link_to  "Cancel", root_path, class: "btn btn-light" %>
+  <% end %>
+</div>

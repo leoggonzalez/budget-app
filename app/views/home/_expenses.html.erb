@@ -1,0 +1,23 @@
+<div class="card p-3">
+  <h4 class="card-title ">Expenses</h4>
+
+  <table class="table table-striped">
+    <%= render "home/tables_head"%>
+    <tbody>
+      <% @expenses.each do |item| %>
+      <tr>
+        <th scope="row"><%= item.description %></th>
+        <% for i in 1..6 do %>
+        <td><%= item.estimate(Date.today.mon + i - 1) %></td>
+        <% end %>
+      </tr>
+      <% end %>
+      <tr>
+        <th scope="row">Total</th>
+        <% @expenses_totals.each do |i| %>
+        <td><%= i %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
