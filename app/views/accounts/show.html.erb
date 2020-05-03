@@ -10,6 +10,10 @@
         <td><%= @account.name %></td>
       </tr>
       <tr>
+        <th scope="row">Owner</th>
+        <td><%= @account.user.username if @account.user %></td>
+      </tr>
+      <tr>
         <th scope="row">Balance</th>
         <td><%= @account.balance %></td>
       </tr>
