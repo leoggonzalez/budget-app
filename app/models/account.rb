@@ -1,14 +1,10 @@
 class Account < ApplicationRecord
+  belongs_to :user
+  has_many :entries
   validates :name, presence: true
 
   def total_balance
     entries = self[:set_entries]
-    return self[:balance] + entries.sum("ammount")
-  end
-
-  private
-
-  def set_entries
-    entries = Entry.where(account_id: self[:id])
+    return self[:balance] + self.entries.sum("ammount")
   end
 end

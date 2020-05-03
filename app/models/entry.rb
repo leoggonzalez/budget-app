@@ -1,5 +1,7 @@
 class Entry < ApplicationRecord
+  belongs_to :account
   validates :ammount, presence: true
+  validates :account_id, presence: true
   
   def estimate(month)
     active_month = self[:active_on].mon
