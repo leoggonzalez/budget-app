@@ -1,8 +1,8 @@
-<% if @entry.errors.any? %>
+<% if obj.errors.any? %>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <h5 class="alert-heading">Errors while trying to submit</h5>
+  <h5 class="alert-heading">There were some errors while trying to submit</h5>
   <ul>
-    <% @entry.errors.full_messages.each do |msg| %>
+    <% obj.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
     <% end %>
   </ul>

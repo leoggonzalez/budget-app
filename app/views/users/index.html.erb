@@ -1,0 +1,38 @@
+<header class="mb-3">
+  <h1>All Entries</h1>
+  <%= link_to "New User", new_user_path, class: "btn btn-primary" %>
+</header>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ammount</th>
+      <th scope="col">Description</th>
+      <th scope="col">Account</th>
+      <th scope="col">Active On</th>
+      <th scope="col">Recurrent</th>
+      <th scope="col">Inactive On</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| %>
+    <tr>
+      <th scope="row"><%= entry.id %></th>
+      <td><%= entry.ammount %></td>
+      <td><%= entry.description %></td>
+      <td><%= @accounts.exists?(entry.account_id) && @accounts.find(entry.account_id)[:name] %></td>
+      <td><%= entry.active_on && entry.active_on.strftime("%d/%m/%Y") %></td>
+      <td><%= entry.recurrent %></td>
+      <td><%= entry.inactive_on && entry.inactive_on.strftime("%d/%m/%Y") %></td>
+      <td>
+        <%= link_to "Edit", edit_entry_path(entry), class: "btn btn-sm btn-warning" %>
+        <%= link_to 'Destroy', entry_path(entry), method: :delete, data: {
+          confirm: "Are you sure you wan't to delete this entry?"
+        }, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

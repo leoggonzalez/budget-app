@@ -1,12 +1,4 @@
-<% if @account.errors.any? %>
-<div class="alert alert-danger" role="alert">
-  <ul>
-    <% @account.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+<%= render 'shared/errors', obj: @account %>
 
 <%= form_with(model: @account, local: true) do |form| %>
 <div class="form-group">
