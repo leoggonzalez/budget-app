@@ -2,13 +2,16 @@
 <div class="mb-4">
   <%= link_to  "New Account", new_account_path, class: "btn btn-primary" %>
 </div>
+
 <div class="row">
+  <% total = 0 %>
   <% @accounts.each do |account| %>
+  <% total += account.current_balance.round(2) %>
   <div class="col-md-4 mb-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title"><%= account.name %></h5>
-        <p class="card-text">Balance: <%= account.balance %></p>
+        <p class="card-text">Balance: <%= account.current_balance.round(2) %></p>
         <%= link_to  "Details", account_path(account), class: "btn btn-primary" %>
         <%= link_to  "Edit", edit_account_path(account), class: "btn btn-warning" %>
         <%= link_to 'Destroy', account_path(account), method: :delete, data: {
@@ -18,4 +21,7 @@
     </div>
   </div>
   <% end %>
+  <div class="mt-4">
+    <strong>Grand Total: <%= total %></strong>
+  </div>
 </div>

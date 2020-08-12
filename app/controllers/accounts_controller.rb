@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:create]
 
   def index
     @accounts = Account.all
@@ -17,6 +18,7 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
+    @account.user = current_user
 
     if @account.save
       flash[:notice] = "Account was created successfully"

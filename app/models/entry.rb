@@ -1,5 +1,6 @@
 class Entry < ApplicationRecord
   belongs_to :account
+  belongs_to :user
   validates :ammount, presence: true
   validates :account_id, presence: true
   

@@ -1,14 +1,13 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :update, :destroy]
+  before_action :require_user
 
   def index
-    @entries = Entry.all
-    @accounts = Account.all
+    @entries = Entry.paginate(page: params[:page], per_page: 5)
   end
 
   def show
     @entry = Entry.find(params[:id])
-    @account = Account.find(@entry[:account_id])
   end
 
   def new
@@ -18,6 +17,7 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(entry_params)
+    @entry.user = current_user
 
     if @entry.save
       flash[:notice] = "Entry was created successfully"

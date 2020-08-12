@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_181555) do
+ActiveRecord::Schema.define(version: 2020_08_11_193641) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
@@ -31,7 +31,9 @@ ActiveRecord::Schema.define(version: 2020_05_03_181555) do
     t.datetime "active_on"
     t.datetime "inactive_on"
     t.string "recurrent"
+    t.integer "user_id"
     t.index ["account_id"], name: "index_entries_on_account_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_181555) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.boolean "admin", default: false
   end
 
 end

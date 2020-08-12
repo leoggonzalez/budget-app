@@ -22,7 +22,7 @@
       <th scope="row"><%= entry.id %></th>
       <td><%= entry.ammount %></td>
       <td><%= entry.description %></td>
-      <td><%= @accounts.exists?(entry.account_id) && @accounts.find(entry.account_id)[:name] %></td>
+      <td><%= entry.account.name %></td>
       <td><%= entry.active_on && entry.active_on.strftime("%d/%m/%Y") %></td>
       <td><%= entry.recurrent %></td>
       <td><%= entry.inactive_on && entry.inactive_on.strftime("%d/%m/%Y") %></td>
@@ -36,3 +36,6 @@
     <% end %>
   </tbody>
 </table>
+<div class="flickr_pagination">
+  <%= will_paginate @entries, :container => false %>
+</div>
